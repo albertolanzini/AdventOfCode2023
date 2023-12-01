@@ -15,7 +15,6 @@ def findSingleSumPart1(line: str) -> str:
 
     while left < right:
         
-
         if line[left] in num_list:
             foundLeft = True
 

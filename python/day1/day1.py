@@ -75,11 +75,3 @@ def findTotalSum(input_list: List[str]) -> int:
 
 data = handleInput('input.txt')
 print(findTotalSum(data))
-
-
-    
-        
-    
-
-    
-

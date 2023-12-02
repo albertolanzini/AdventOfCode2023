@@ -15,7 +15,7 @@ class GameValidator:
     def _split_line(self, line: str) -> List[str]:
         return re.split(';|,|:', line)
     
-    def _handle_draw(self, draw):
+    def _handle_draw(self, draw: str) -> tuple(str, int):
         draw = draw.strip()
 
         color = ''.join(l for l in draw if l.isalpha())
@@ -23,7 +23,7 @@ class GameValidator:
 
         return (color, num)
 
-    def _validate_line_p1(self, line):
+    def _validate_line_p1(self, line: str) -> bool:
         line = self._split_line(line)
 
         for draw in line[1:]:
@@ -33,7 +33,7 @@ class GameValidator:
                 return False
         return True
     
-    def _min_numbers_p2(self, line):
+    def _min_numbers_p2(self, line: List[str]) -> int:
         line = self._split_line(line)
 
         min_green, min_blue, min_red = 0, 0, 0

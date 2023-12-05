@@ -5,7 +5,7 @@ class SeedPlanter:
         self.data = self._handle_input(inputfile)
         self.seeds, self.maps = self._parse_data(self.data)
 
-    def _handle_input(self, inputfile):
+    def _handle_input(self, inputfile: str) -> List[str]:
         with open(inputfile, 'r') as file:
             return file.read().split('\n\n')
     
@@ -22,7 +22,7 @@ class SeedPlanter:
 
         return seeds, maps
     
-    def map_elements_to_values(self, element, map_name):
+    def map_elements_to_values(self, element: int, map_name: str) -> int:
         mapping_list = self.maps[map_name]
         for value, initial_element, _range in mapping_list:
             if initial_element <= element < initial_element + _range:

@@ -29,9 +29,9 @@ class SeedPlanter:
                 return value + (element - initial_element)
         return element
     
-    def _find_smaller_location(self) -> int:
+    def _find_smaller_location_p1(self, seeds: List[int]) -> int:
         min_location = float('inf')
-        for seed in self.seeds:
+        for seed in seeds:
             mapped_value = seed
             for map_name in ['seed-to-soil map', 'soil-to-fertilizer map', 'fertilizer-to-water map', 
                             'water-to-light map', 'light-to-temperature map', 'temperature-to-humidity map', 
@@ -40,13 +40,35 @@ class SeedPlanter:
                 mapped_value = self.map_elements_to_values(mapped_value, map_name)
             min_location = min(min_location, mapped_value)
         return min_location
+    
+    def _find_smaller_location_p2(self) -> int:
+        min_location = float('inf')
+        for seed in self._seed_range():
+            mapped_value = seed
+            for map_name in ['seed-to-soil map', 'soil-to-fertilizer map', 'fertilizer-to-water map', 
+                            'water-to-light map', 'light-to-temperature map', 'temperature-to-humidity map', 
+                            'humidity-to-location map']:
+                mapped_value = self.map_elements_to_values(mapped_value, map_name)
+            min_location = min(min_location, mapped_value)
+        return min_location
+
+    def _seed_range(self) -> List[int]:
+        for i in range(0, len(self.seeds), 2):
+            start = self.seeds[i]
+            length = self.seeds[i+1]
+            for seed in range(start, start + length):
+                yield seed
 
 def main():
     seed_planter = SeedPlanter('input.txt')
 
     # Part 1 usage
 
-    print(seed_planter._find_smaller_location())
+    # print(seed_planter._find_smaller_location(seed_planter.seeds))
+
+    # Part 2 usage
+
+    print(seed_planter._find_smaller_location_p2())
 
 if __name__ == "__main__":
     main()
